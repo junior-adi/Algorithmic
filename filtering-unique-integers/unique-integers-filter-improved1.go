@@ -747,4 +747,44 @@ func main() {
 	fmt.Printf("Execution time: %v\n", duration)
 	fmt.Printf("HUGE SETS TESTING WITH BIT MAP ALGORITHM END\n\n")
 
+	/* TESTING NEW GENERATOR METHODS */
+
+	fmt.Println("random arrays")
+
+	// Generate a random array of integers with 10 elements and a maximum random value of 100
+    arr1 := make([]int, 10)
+    err1 := generateRandomInputArrImproved(arr1,10, 100)
+    if err1 != nil {
+        fmt.Println(err1)
+    } else {
+        fmt.Println(arr1)
+    }
+
+    // Generate a growing array of integers with 10 elements
+    arr2 := make([]int, 10)
+    err2 := generateGrowingArrImproved(arr2, 10)
+    if err2 != nil {
+        fmt.Println(err2)
+    } else {
+        fmt.Println(arr2)
+    }
+
+    // Generate a random array of integers with 10 elements, a maximum random value of 100, and 5 duplicates
+    arr3 := make([]int, 10)
+    err3 := generateRandomInputArrImproved2(arr3, 10, 100, 5)
+    if err3 != nil {
+        fmt.Println(err3)
+    } else {
+        fmt.Println(arr3)
+    }
+
+    // Generate a growing array of integers with 10 elements and 5 duplicates
+    arr4 := make([]int, 10)
+    err4 := generateGrowingArrImproved2(arr4, 10, 5)
+    if err4 != nil {
+        fmt.Println(err4)
+    } else {
+        fmt.Println(arr4)
+    }
+
 }
