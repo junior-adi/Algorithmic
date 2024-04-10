@@ -1,0 +1,412 @@
+Benchmark results
+Date: 2024-04-09T23:43:11Z
+Author: Junior ADI
+---------------------------------------
+Benchmark for array size 10
+Benchmark for Naive algorithm
+Execution time: 4.172µs
+Benchmark for Improved algorithm
+Execution time: 1.098µs
+Benchmark for HashTable algorithm
+Execution time: 3.541µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 861.911µs
+Benchmark for BitHashTable algorithm
+Execution time: 51.56µs
+---------------------------------------
+Benchmark for array size 20
+Benchmark for Naive algorithm
+Execution time: 3.909µs
+Benchmark for Improved algorithm
+Execution time: 1.804µs
+Benchmark for HashTable algorithm
+Execution time: 8.797µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 6.400446ms
+Benchmark for BitHashTable algorithm
+Execution time: 308.593µs
+---------------------------------------
+Benchmark for array size 30
+Benchmark for Naive algorithm
+Execution time: 2.935µs
+Benchmark for Improved algorithm
+Execution time: 2.563µs
+Benchmark for HashTable algorithm
+Execution time: 21.364µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 1.740539ms
+Benchmark for BitHashTable algorithm
+Execution time: 393.477µs
+---------------------------------------
+Benchmark for array size 40
+Benchmark for Naive algorithm
+Execution time: 6.36µs
+Benchmark for Improved algorithm
+Execution time: 2.496µs
+Benchmark for HashTable algorithm
+Execution time: 23.965µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 15.226742ms
+Benchmark for BitHashTable algorithm
+Execution time: 972.29µs
+---------------------------------------
+Benchmark for array size 50
+Benchmark for Naive algorithm
+Execution time: 3.653µs
+Benchmark for Improved algorithm
+Execution time: 3.372µs
+Benchmark for HashTable algorithm
+Execution time: 23.897µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 16.307745ms
+Benchmark for BitHashTable algorithm
+Execution time: 1.120562ms
+---------------------------------------
+Benchmark for array size 60
+Benchmark for Naive algorithm
+Execution time: 8.261µs
+Benchmark for Improved algorithm
+Execution time: 7.727µs
+Benchmark for HashTable algorithm
+Execution time: 69.408µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 8.551931ms
+Benchmark for BitHashTable algorithm
+Execution time: 922.36µs
+---------------------------------------
+Benchmark for array size 70
+Benchmark for Naive algorithm
+Execution time: 20.616µs
+Benchmark for Improved algorithm
+Execution time: 10.07µs
+Benchmark for HashTable algorithm
+Execution time: 45.59µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 8.717719ms
+Benchmark for BitHashTable algorithm
+Execution time: 641.08µs
+---------------------------------------
+Benchmark for array size 80
+Benchmark for Naive algorithm
+Execution time: 11.017µs
+Benchmark for Improved algorithm
+Execution time: 9.905µs
+Benchmark for HashTable algorithm
+Execution time: 52.883µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 22.951164ms
+Benchmark for BitHashTable algorithm
+Execution time: 983.451µs
+---------------------------------------
+Benchmark for array size 90
+Benchmark for Naive algorithm
+Execution time: 9.395µs
+Benchmark for Improved algorithm
+Execution time: 7.138µs
+Benchmark for HashTable algorithm
+Execution time: 32.193µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 15.602455ms
+Benchmark for BitHashTable algorithm
+Execution time: 748.731µs
+---------------------------------------
+Benchmark for array size 100
+Benchmark for Naive algorithm
+Execution time: 10.712µs
+Benchmark for Improved algorithm
+Execution time: 8.443µs
+Benchmark for HashTable algorithm
+Execution time: 37.336µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 10.513001ms
+Benchmark for BitHashTable algorithm
+Execution time: 1.399137ms
+---------------------------------------
+Benchmark for array size 200
+Benchmark for Naive algorithm
+Execution time: 38.38µs
+Benchmark for Improved algorithm
+Execution time: 35.819µs
+Benchmark for HashTable algorithm
+Execution time: 119.554µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 13.510475ms
+Benchmark for BitHashTable algorithm
+Execution time: 1.413401ms
+---------------------------------------
+Benchmark for array size 300
+Benchmark for Naive algorithm
+Execution time: 46.294µs
+Benchmark for Improved algorithm
+Execution time: 56.63µs
+Benchmark for HashTable algorithm
+Execution time: 86.519µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 12.919361ms
+Benchmark for BitHashTable algorithm
+Execution time: 2.581832ms
+---------------------------------------
+Benchmark for array size 400
+Benchmark for Naive algorithm
+Execution time: 110.784µs
+Benchmark for Improved algorithm
+Execution time: 97.178µs
+Benchmark for HashTable algorithm
+Execution time: 93.946µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 26.343939ms
+Benchmark for BitHashTable algorithm
+Execution time: 6.397853ms
+---------------------------------------
+Benchmark for array size 500
+Benchmark for Naive algorithm
+Execution time: 117.416µs
+Benchmark for Improved algorithm
+Execution time: 131.958µs
+Benchmark for HashTable algorithm
+Execution time: 167.866µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 23.774136ms
+Benchmark for BitHashTable algorithm
+Execution time: 3.074416ms
+---------------------------------------
+Benchmark for array size 600
+Benchmark for Naive algorithm
+Execution time: 141.736µs
+Benchmark for Improved algorithm
+Execution time: 138.744µs
+Benchmark for HashTable algorithm
+Execution time: 109.461µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 14.300053ms
+Benchmark for BitHashTable algorithm
+Execution time: 5.210008ms
+---------------------------------------
+Benchmark for array size 700
+Benchmark for Naive algorithm
+Execution time: 219.698µs
+Benchmark for Improved algorithm
+Execution time: 217.57µs
+Benchmark for HashTable algorithm
+Execution time: 135.592µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 24.706667ms
+Benchmark for BitHashTable algorithm
+Execution time: 8.598428ms
+---------------------------------------
+Benchmark for array size 800
+Benchmark for Naive algorithm
+Execution time: 246.009µs
+Benchmark for Improved algorithm
+Execution time: 311.972µs
+Benchmark for HashTable algorithm
+Execution time: 169.98µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 13.586489ms
+Benchmark for BitHashTable algorithm
+Execution time: 7.809731ms
+---------------------------------------
+Benchmark for array size 900
+Benchmark for Naive algorithm
+Execution time: 394.445µs
+Benchmark for Improved algorithm
+Execution time: 354.534µs
+Benchmark for HashTable algorithm
+Execution time: 248.406µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 18.604986ms
+Benchmark for BitHashTable algorithm
+Execution time: 7.269775ms
+---------------------------------------
+Benchmark for array size 1000
+Benchmark for Naive algorithm
+Execution time: 488.511µs
+Benchmark for Improved algorithm
+Execution time: 399.789µs
+Benchmark for HashTable algorithm
+Execution time: 188.26µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 11.947981ms
+Benchmark for BitHashTable algorithm
+Execution time: 10.650419ms
+---------------------------------------
+Benchmark for array size 2000
+Benchmark for Naive algorithm
+Execution time: 1.931545ms
+Benchmark for Improved algorithm
+Execution time: 1.503019ms
+Benchmark for HashTable algorithm
+Execution time: 389.129µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 10.893459ms
+Benchmark for BitHashTable algorithm
+Execution time: 13.513236ms
+---------------------------------------
+Benchmark for array size 3000
+Benchmark for Naive algorithm
+Execution time: 4.249669ms
+Benchmark for Improved algorithm
+Execution time: 4.528741ms
+Benchmark for HashTable algorithm
+Execution time: 608.851µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 10.891415ms
+Benchmark for BitHashTable algorithm
+Execution time: 26.530586ms
+---------------------------------------
+Benchmark for array size 4000
+Benchmark for Naive algorithm
+Execution time: 7.217994ms
+Benchmark for Improved algorithm
+Execution time: 7.085036ms
+Benchmark for HashTable algorithm
+Execution time: 922.463µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 14.022622ms
+Benchmark for BitHashTable algorithm
+Execution time: 45.052841ms
+---------------------------------------
+Benchmark for array size 5000
+Benchmark for Naive algorithm
+Execution time: 9.555484ms
+Benchmark for Improved algorithm
+Execution time: 9.364008ms
+Benchmark for HashTable algorithm
+Execution time: 886.62µs
+Benchmark for DynamicHashTable algorithm
+Execution time: 12.023891ms
+Benchmark for BitHashTable algorithm
+Execution time: 39.047825ms
+---------------------------------------
+Benchmark for array size 6000
+Benchmark for Naive algorithm
+Execution time: 12.864174ms
+Benchmark for Improved algorithm
+Execution time: 16.322233ms
+Benchmark for HashTable algorithm
+Execution time: 1.363446ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 18.39633ms
+Benchmark for BitHashTable algorithm
+Execution time: 51.960298ms
+---------------------------------------
+Benchmark for array size 7000
+Benchmark for Naive algorithm
+Execution time: 18.283243ms
+Benchmark for Improved algorithm
+Execution time: 18.298902ms
+Benchmark for HashTable algorithm
+Execution time: 1.160123ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 14.59344ms
+Benchmark for BitHashTable algorithm
+Execution time: 64.962227ms
+---------------------------------------
+Benchmark for array size 8000
+Benchmark for Naive algorithm
+Execution time: 34.343233ms
+Benchmark for Improved algorithm
+Execution time: 23.019597ms
+Benchmark for HashTable algorithm
+Execution time: 1.283306ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 12.985027ms
+Benchmark for BitHashTable algorithm
+Execution time: 72.45775ms
+---------------------------------------
+Benchmark for array size 9000
+Benchmark for Naive algorithm
+Execution time: 37.006691ms
+Benchmark for Improved algorithm
+Execution time: 35.09336ms
+Benchmark for HashTable algorithm
+Execution time: 2.315894ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 13.305831ms
+Benchmark for BitHashTable algorithm
+Execution time: 66.955783ms
+---------------------------------------
+Benchmark for array size 10000
+Benchmark for Naive algorithm
+Execution time: 39.214763ms
+Benchmark for Improved algorithm
+Execution time: 56.388801ms
+Benchmark for HashTable algorithm
+Execution time: 2.000054ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 13.820236ms
+Benchmark for BitHashTable algorithm
+Execution time: 99.019255ms
+---------------------------------------
+Benchmark for array size 50000
+Benchmark for Naive algorithm
+Execution time: 975.190929ms
+Benchmark for Improved algorithm
+Execution time: 920.796827ms
+Benchmark for HashTable algorithm
+Execution time: 9.144058ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 28.913342ms
+Benchmark for BitHashTable algorithm
+Execution time: 330.6653ms
+---------------------------------------
+Benchmark for array size 100000
+Benchmark for Naive algorithm
+Execution time: 3.679700001s
+Benchmark for Improved algorithm
+Execution time: 3.612598078s
+Benchmark for HashTable algorithm
+Execution time: 20.762432ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 31.202829ms
+Benchmark for BitHashTable algorithm
+Execution time: 477.95308ms
+---------------------------------------
+Benchmark for array size 200000
+Benchmark for Naive algorithm
+Execution time: 15.18070448s
+Benchmark for Improved algorithm
+Execution time: 15.450114373s
+Benchmark for HashTable algorithm
+Execution time: 43.977539ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 26.15343ms
+Benchmark for BitHashTable algorithm
+Execution time: 931.877119ms
+---------------------------------------
+Benchmark for array size 300000
+Benchmark for Naive algorithm
+Execution time: 36.558919881s
+Benchmark for Improved algorithm
+Execution time: 43.171577251s
+Benchmark for HashTable algorithm
+Execution time: 89.704172ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 56.847546ms
+Benchmark for BitHashTable algorithm
+Execution time: 729.574448ms
+---------------------------------------
+Benchmark for array size 400000
+Benchmark for Naive algorithm
+Execution time: 1m12.505189597s
+Benchmark for Improved algorithm
+Execution time: 1m17.676525847s
+Benchmark for HashTable algorithm
+Execution time: 131.325478ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 42.050172ms
+Benchmark for BitHashTable algorithm
+Execution time: 963.87425ms
+---------------------------------------
+Benchmark for array size 500000
+Benchmark for Naive algorithm
+Execution time: 2m30.827336618s
+Benchmark for Improved algorithm
+Execution time: 2m16.058036347s
+Benchmark for HashTable algorithm
+Execution time: 240.031755ms
+Benchmark for DynamicHashTable algorithm
+Execution time: 55.472192ms
+Benchmark for BitHashTable algorithm
+Execution time: 1.081943393s
+---------------------------------------
