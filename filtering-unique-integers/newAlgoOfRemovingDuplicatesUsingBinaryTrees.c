@@ -3,12 +3,14 @@
 
   License GPLv3
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 // Définition de la structure d'un noeud d'arbre binaire
 typedef struct Node {
     int data;
+    int count;
     struct Node* left;
     struct Node* right;
 } Node;
@@ -17,6 +19,7 @@ typedef struct Node {
 Node* createNode(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
+    newNode->count = 1;
     newNode->left = NULL;
     newNode->right = NULL;
     return newNode;
@@ -32,13 +35,39 @@ Node* insertNode(Node* root, int data) {
         root->left = insertNode(root->left, data);
     } else if (data > root->data) {
         root->right = insertNode(root->right, data);
+    } else {
+        root->count++;
     }
     
     return root;
 }
 
-// Fonction pour supprimer les doublons
-Node* removeDuplicates(int* arr, int size) {
+// Fonction pour afficher les éléments non uniques
+void printNonUnique(Node* root) {
+    if (root != NULL) {
+        printNonUnique(root->left);
+        if (root->count > 1) {
+            printf("%d apparaît %d fois\n", root->data, root->count);
+        }
+        printNonUnique(root->right);
+    }
+}
+
+// Fonction pour afficher les éléments uniques
+void printUnique(Node* root) {
+    if (root != NULL) {
+        printUnique(root->left);
+        if (root->count == 1) {
+            printf("%d est unique\n", root->data);
+        }
+        printUnique(root->right);
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 2, 4, 5, 1, 6};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    
     Node* root = NULL;
     
     // Insérer les éléments dans l'arbre
@@ -46,26 +75,13 @@ Node* removeDuplicates(int* arr, int size) {
         root = insertNode(root, arr[i]);
     }
     
-    return root;
-}
+    // Parcourir l'arbre et afficher les éléments non uniques
+    printf("Eléments non uniques:\n");
+    printNonUnique(root);
 
-int main() {
-    int arr[] = {1, 2, 3, 2, 4, 5, 1, 6};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    
-    Node* uniqueRoot = removeDuplicates(arr, size);
-    
-    // Parcourir l'arbre et afficher les éléments uniques
-    printf("Eléments uniques:\n");
-    if (uniqueRoot != NULL) {
-        if (uniqueRoot->left != NULL) {
-            printf("%d\n", uniqueRoot->left->data);
-        }
-        printf("%d\n", uniqueRoot->data);
-        if (uniqueRoot->right != NULL) {
-            printf("%d\n", uniqueRoot->right->data);
-        }
-    }
+    // Parcourir l'arbre et afficher les éléments non uniques
+    printf("Eléments non uniques:\n");
+    printUnique(root);
     
     return 0;
 }
