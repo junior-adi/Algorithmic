@@ -80,7 +80,7 @@ int main() {
     printNonUnique(root);
 
     // Parcourir l'arbre et afficher les éléments non uniques
-    printf("Eléments non uniques:\n");
+    printf("Eléments uniques:\n");
     printUnique(root);
     
     return 0;
