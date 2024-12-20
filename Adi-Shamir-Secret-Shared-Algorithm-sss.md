@@ -395,3 +395,725 @@ Once the data exchange is complete, the connection can be securely terminated. T
 - **Authentication**: Verifies the identity of the parties involved, ensuring that clients are communicating with legitimate servers.
 - **Data Integrity**: Ensures that the data has not been tampered with during transmission.
 ```
+
+# PSEUDO-CODE for Shamir's Secret Sharing
+
+#### 1. Generating Shares
+```pseudo
+function generate_shares(secret, k, n):
+    // secret: the secret to share
+    // k: the minimum number of shares needed to recover the secret
+    // n: the total number of shares to generate
+
+    // Random coefficients a1, a2, ..., ak-1
+    coefficients = random_coefficients(k - 1, secret) // array of size k-1
+
+    shares = []
+    for i from 1 to n:
+        x_i = i
+        y_i = polynomial(x_i, coefficients, secret) // Calculate P(x_i)
+        shares.append((x_i, y_i)) // Add the share (x_i, y_i)
+
+    return shares
+```
+
+#### 2. Evaluating the Polynomial
+```pseudo
+function polynomial(x, coefficients, secret):
+    // coefficients: array of coefficients a1, a2, ..., ak-1
+    // secret: the constant term a0 = secret
+
+    result = secret // Start with the secret
+    for i from 1 to length(coefficients):
+        result += coefficients[i - 1] * (x ^ i) // Add each term
+    return result
+```
+
+#### 3. Recovering the Secret
+```pseudo
+function recover_secret(shares):
+    // shares: list of shares (x_i, y_i) received
+    k = length(shares) // Number of received shares
+    secret = 0
+
+    for i from 0 to k - 1:
+        x_i, y_i = shares[i]
+        L_i = lagrange_basis(shares, x_i) // Calculate the Lagrange basis
+        secret += y_i * L_i // Add to the secret
+
+    return secret
+```
+
+#### 4. Calculating the Lagrange Basis
+```pseudo
+function lagrange_basis(shares, x_i):
+    // shares: list of shares (x_j, y_j)
+    product = 1
+
+    for j from 0 to length(shares) - 1:
+        if shares[j][0] != x_i:
+            x_j = shares[j][0]
+            product *= (0 - x_j) / (x_i - x_j) // Calculate the Lagrange basis L_i
+
+    return product
+```
+
+### Explanation of Functions
+- **generate_shares**: Creates the shares of the secret by generating a random polynomial and evaluating this polynomial at different points.
+- **polynomial**: Calculates the value of the polynomial given at a certain point \( x \).
+- **recover_secret**: Uses the received shares to reconstruct the secret using Lagrange interpolation.
+- **lagrange_basis**: Calculates the Lagrange basis polynomial for a given point.
+
+### Pseudo-code for Shamir's Secret Sharing with Modular Arithmetic
+
+#### 1. Generating Shares
+```pseudo
+function generate_shares(secret, k, n, p):
+    // secret: the secret to share
+    // k: the minimum number of shares needed to recover the secret
+    // n: the total number of shares to generate
+    // p: a prime number greater than secret
+
+    // Random coefficients a1, a2, ..., ak-1
+    coefficients = random_coefficients(k - 1, p, secret) // array of size k-1
+
+    shares = []
+    for i from 1 to n:
+        x_i = i
+        y_i = polynomial(x_i, coefficients, secret, p) // Calculate P(x_i) mod p
+        shares.append((x_i, y_i)) // Add the share (x_i, y_i)
+
+    return shares
+```
+
+#### 2. Evaluating the Polynomial
+```pseudo
+function polynomial(x, coefficients, secret, p):
+    // coefficients: array of coefficients a1, a2, ..., ak-1
+    // secret: the constant term a0 = secret
+    // p: prime number for modular arithmetic
+
+    result = secret % p // Start with the secret mod p
+    for i from 1 to length(coefficients):
+        result = (result + (coefficients[i - 1] * (x ^ i) % p)) % p // Add each term modulo p
+    return result
+```
+
+#### 3. Recovering the Secret
+```pseudo
+function recover_secret(shares, p):
+    // shares: list of shares (x_i, y_i) received
+    k = length(shares) // Number of received shares
+    secret = 0
+
+    for i from 0 to k - 1:
+        x_i, y_i = shares[i]
+        L_i = lagrange_basis(shares, x_i, p) // Calculate the Lagrange basis mod p
+        secret = (secret + (y_i * L_i) % p) % p // Add to the secret mod p
+
+    return secret
+```
+
+#### 4. Calculating the Lagrange Basis
+```pseudo
+function lagrange_basis(shares, x_i, p):
+    // shares: list of shares (x_j, y_j)
+    product = 1
+
+    for j from 0 to length(shares) - 1:
+        if shares[j][0] != x_i:
+            x_j = shares[j][0]
+            product = (product * (0 - x_j) * mod_inverse(x_i - x_j, p)) % p // Calculate the Lagrange basis L_i mod p
+
+    return product % p
+```
+
+#### 5. Calculating Modular Inverse
+```pseudo
+function mod_inverse(a, p):
+    // a: number to find the inverse of
+    // p: prime number
+
+    return pow(a, p - 2, p) // Using Fermat's Little Theorem
+```
+
+### Explanation of Functions
+- **generate_shares**: Creates the shares of the secret by generating a random polynomial and evaluating this polynomial at different points, all under modulo \( p \).
+- **polynomial**: Calculates the value of the polynomial at a certain point \( x \), using modular arithmetic.
+- **recover_secret**: Uses the received shares to reconstruct the secret using Lagrange interpolation, applying modular arithmetic throughout.
+- **lagrange_basis**: Calculates the Lagrange basis polynomial for a given point, ensuring all calculations are done modulo \( p \).
+- **mod_inverse**: Calculates the modular inverse of a number using Fermat's Little Theorem, which is necessary for the Lagrange basis calculations.
+
+# CODES 
+
+## C implementation of Shamir's Secret Sharing algorithm using polynomial functions (Lagrange Polynomial function)
+
+C Code for Shamir's Secret Sharing Using Lagrange Interpolation to recover the secret.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to calculate modular inverse using Extended Euclidean Algorithm
+int mod_inverse(int a, int p) {
+    int m0 = p, t, q;
+    int x0 = 0, x1 = 1;
+
+    if (p == 1) return 0;
+
+    while (a > 1) {
+        q = a / p;
+        t = p;
+
+        p = a % p;
+        a = t;
+
+        t = x0;
+        x0 = x1 - q * x0;
+        x1 = t;
+    }
+
+    if (x1 < 0) x1 += m0;
+
+    return x1;
+}
+
+// Function to evaluate the polynomial at a given x
+int polynomial(int x, int* coefficients, int k, int secret, int p) {
+    int result = secret % p;
+
+    for (int i = 0; i < k - 1; i++) {
+        result = (result + (coefficients[i] * pow(x, i + 1)) % p) % p;
+    }
+
+    return result;
+}
+
+// Function to generate shares
+void generate_shares(int secret, int k, int n, int p, int shares[][2]) {
+    int coefficients[k - 1];
+
+    // Generate random coefficients
+    for (int i = 0; i < k - 1; i++) {
+        coefficients[i] = rand() % p; // Random coefficient in [0, p)
+    }
+
+    // Create shares
+    for (int i = 1; i <= n; i++) {
+        shares[i - 1][0] = i; // x_i
+        shares[i - 1][1] = polynomial(i, coefficients, k, secret, p); // y_i
+    }
+}
+
+// Function to calculate Lagrange basis
+int lagrange_basis(int shares[][2], int k, int x_i, int p) {
+    int product = 1;
+
+    for (int j = 0; j < k; j++) {
+        if (shares[j][0] != x_i) {
+            int x_j = shares[j][0];
+            product = (product * (0 - x_j) % p * mod_inverse(x_i - x_j, p)) % p;
+        }
+    }
+
+    return (product + p) % p; // Ensure positive result
+}
+
+// Function to recover secret
+int recover_secret(int shares[][2], int k, int p) {
+    int secret = 0;
+
+    for (int i = 0; i < k; i++) {
+        int x_i = shares[i][0];
+        int y_i = shares[i][1];
+        int L_i = lagrange_basis(shares, k, x_i, p);
+
+        secret = (secret + (y_i * L_i) % p) % p;
+    }
+
+    return (secret + p) % p; // Ensure positive result
+}
+
+int main() {
+    int secret = 5887; // Secret to share
+    int k = 3;         // Minimum shares needed
+    int n = 5;         // Total shares to generate
+    int p = 6301;      // Prime number greater than secret
+
+    int shares[n][2];  // Array to hold shares
+
+    // Seed random number generator
+    srand(time(NULL));
+
+    // Generate shares
+    generate_shares(secret, k, n, p, shares);
+
+    // Print shares
+    printf("Generated Shares:\n");
+    for (int i = 0; i < n; i++) {
+        printf("Share %d: (%d, %d)\n", i + 1, shares[i][0], shares[i][1]);
+    }
+
+    // Example of recovering the secret using the first k shares
+    int recovered_secret = recover_secret(shares, k, p);
+    printf("Recovered Secret: %d\n", recovered_secret);
+
+    return 0;
+}
+```
+
+### Explanation of the Code
+- **mod_inverse**: Calculates the modular inverse using the Extended Euclidean Algorithm.
+- **polynomial**: Evaluates the polynomial at a given \( x \) using the coefficients and the secret.
+- **generate_shares**: Generates \( n \) shares based on the secret, \( k \), and a prime \( p \).
+- **lagrange_basis**: Computes the Lagrange basis polynomial for a given share.
+- **recover_secret**: Recovers the secret using \( k \) shares by applying Lagrange interpolation.
+- **main**: Initializes parameters, generates shares, and demonstrates secret recovery.
+
+### Compilation and Execution
+To compile the code, use:
+```bash
+gcc -o shamir shamir.c -lm
+```
+
+Run the executable:
+```bash
+./shamir
+```
+
+## C implementation of Shamir's Secret Sharing algorithm using modular arithmetic
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to calculate modular inverse using Extended Euclidean Algorithm
+int mod_inverse(int a, int p) {
+    int m0 = p, t, q;
+    int x0 = 0, x1 = 1;
+
+    if (p == 1) return 0;
+
+    while (a > 1) {
+        // q is quotient
+        q = a / p;
+        t = p;
+
+        // m is remainder now, process same as Euclid's algorithm
+        p = a % p, a = t;
+        t = x0;
+
+        x0 = x1 - q * x0;
+        x1 = t;
+    }
+
+    if (x1 < 0) x1 += m0;
+
+    return x1;
+}
+
+// Function to evaluate the polynomial at a given x
+int polynomial(int x, int* coefficients, int k, int secret, int p) {
+    int result = secret % p;
+
+    for (int i = 1; i < k; i++) {
+        result = (result + (coefficients[i - 1] * pow(x, i)) % p) % p;
+    }
+
+    return result;
+}
+
+// Function to generate shares
+void generate_shares(int secret, int k, int n, int p, int shares[][2]) {
+    int coefficients[k - 1];
+
+    // Generate random coefficients
+    for (int i = 0; i < k - 1; i++) {
+        coefficients[i] = rand() % p; // Random coefficient in [0, p)
+    }
+
+    // Create shares
+    for (int i = 1; i <= n; i++) {
+        shares[i - 1][0] = i; // x_i
+        shares[i - 1][1] = polynomial(i, coefficients, k, secret, p); // y_i
+    }
+}
+
+// Function to calculate Lagrange basis
+int lagrange_basis(int shares[][2], int k, int x_i, int p) {
+    int product = 1;
+
+    for (int j = 0; j < k; j++) {
+        if (shares[j][0] != x_i) {
+            int x_j = shares[j][0];
+            product = (product * (0 - x_j) % p * mod_inverse(x_i - x_j, p)) % p;
+        }
+    }
+
+    return (product + p) % p; // Ensure positive result
+}
+
+// Function to recover secret
+int recover_secret(int shares[][2], int k, int p) {
+    int secret = 0;
+
+    for (int i = 0; i < k; i++) {
+        int x_i = shares[i][0];
+        int y_i = shares[i][1];
+        int L_i = lagrange_basis(shares, k, x_i, p);
+
+        secret = (secret + (y_i * L_i) % p) % p;
+    }
+
+    return (secret + p) % p; // Ensure positive result
+}
+
+int main() {
+    int secret = 5887; // Secret to share
+    int k = 3;         // Minimum shares needed
+    int n = 5;         // Total shares to generate
+    int p = 6301;      // Prime number greater than secret
+
+    int shares[n][2];  // Array to hold shares
+
+    // Seed random number generator
+    srand(time(NULL));
+
+    // Generate shares
+    generate_shares(secret, k, n, p, shares);
+
+    // Print shares
+    printf("Generated Shares:\n");
+    for (int i = 0; i < n; i++) {
+        printf("Share %d: (%d, %d)\n", i + 1, shares[i][0], shares[i][1]);
+    }
+
+    // Example of recovering the secret using the first k shares
+    int recovered_secret = recover_secret(shares, k, p);
+    printf("Recovered Secret: %d\n", recovered_secret);
+
+    return 0;
+}
+```
+
+### Explanation of the Code
+- **mod_inverse**: Calculates the modular inverse using the Extended Euclidean Algorithm.
+- **polynomial**: Evaluates the polynomial at a given \( x \) using the coefficients and the secret.
+- **generate_shares**: Generates \( n \) shares based on the secret, \( k \), and a prime \( p \).
+- **lagrange_basis**: Computes the Lagrange basis polynomial for a given share.
+- **recover_secret**: Recovers the secret using \( k \) shares by applying Lagrange interpolation.
+- **main**: Initializes parameters, generates shares, and demonstrates secret recovery.
+
+### Compilation
+To compile the code, use:
+```bash
+gcc -o shamir shamir.c -lm
+```
+
+### Execution
+Run the executable:
+```bash
+./shamir
+```
+
+### Bash Script for Shamir's Secret Sharing
+
+This Bash script implements a simplified version of Shamir's Secret Sharing algorithm using modular arithmetic. Note that Bash is not as suited for mathematical computations as languages like C or Python, but we can still demonstrate the concept.
+
+```bash
+#!/bin/bash
+
+# Function to calculate modular inverse using Extended Euclidean Algorithm
+mod_inverse() {
+    local a=$1
+    local p=$2
+    local m0=$p
+    local t=0
+    local q=0
+    local x0=0
+    local x1=1
+
+    if [ "$p" -eq 1 ]; then
+        echo 0
+        return
+    fi
+
+    while [ "$a" -gt 1 ]; do
+        q=$((a / p))
+        t=$p
+        p=$((a % p))
+        a=$t
+        t=$x0
+        x0=$((x1 - q * x0))
+        x1=$t
+    done
+
+    if [ "$x1" -lt 0 ]; then
+        x1=$((x1 + m0))
+    fi
+
+    echo $x1
+}
+
+# Function to evaluate the polynomial at a given x
+polynomial() {
+    local x=$1
+    shift
+    local secret=$1
+    shift
+    local p=$1
+    shift
+    local result=$secret
+
+    for i in "$@"; do
+        result=$(( (result + (i * (x ** $(( $# + 1 )))) % p) + p ) % p )) # (secret + a[i] * x^i) mod p
+    done
+
+    echo $result
+}
+
+# Function to generate shares
+generate_shares() {
+    local secret=$1
+    local k=$2
+    local n=$3
+    local p=$4
+
+    local coefficients=()
+    for ((i = 0; i < k - 1; i++)); do
+        coefficients[i]=$((RANDOM % p)) # Random coefficient in [0, p)
+    done
+
+    echo "Generated Shares:"
+    for ((i = 1; i <= n; i++)); do
+        local y=$(polynomial "$i" "$secret" "$p" "${coefficients[@]}")
+        echo "Share $i: ($i, $y)"
+    done
+}
+
+# Function to calculate Lagrange basis
+lagrange_basis() {
+    local x_i=$1
+    shift
+    local p=$1
+    shift
+    local product=1
+
+    for share in "$@"; do
+        local x_j=$(echo "$share" | cut -d',' -f1)
+        if [ "$x_j" -ne "$x_i" ]; then
+            product=$(( (product * (0 - x_j) % p * $(mod_inverse $((x_i - x_j)) $p)) % p + p) % p ))
+        fi
+    done
+
+    echo $product
+}
+
+# Function to recover secret
+recover_secret() {
+    local k=$1
+    local p=$2
+    shift 2
+    local shares=("$@")
+    local secret=0
+
+    for i in "${shares[@]}"; do
+        local x_i=$(echo "$i" | cut -d',' -f1)
+        local y_i=$(echo "$i" | cut -d',' -f2)
+        local L_i=$(lagrange_basis "$x_i" "$p" "${shares[@]}")
+        secret=$(( (secret + (y_i * L_i) % p) % p + p ) % p)
+    done
+
+    echo "$secret"
+}
+
+# Main script
+secret=5887        # Secret to share
+k=3                # Minimum shares needed
+n=5                # Total shares to generate
+p=6301             # Prime number greater than secret
+
+# Generate shares
+shares=()
+for ((i = 1; i <= n; i++)); do
+    share="$i,$((RANDOM % p))" # Simplified share generation for demonstration
+    shares+=("$share")
+done
+
+# Print generated shares
+generate_shares "$secret" "$k" "$n" "$p"
+
+# Example of recovering the secret using the first k shares
+recovered_secret=$(recover_secret "$k" "$p" "${shares[@]:0:$k}")
+echo "Recovered Secret: $recovered_secret"
+```
+
+### Explanation of the Script
+- **mod_inverse**: Calculates the modular inverse using the Extended Euclidean Algorithm.
+- **polynomial**: Evaluates the polynomial at a given \( x \) using the coefficients and the secret.
+- **generate_shares**: Generates shares based on the secret, \( k \), and a prime \( p \). It uses random coefficients.
+- **lagrange_basis**: Computes the Lagrange basis polynomial for a given share.
+- **recover_secret**: Recovers the secret using \( k \) shares by applying Lagrange interpolation.
+- **Main**: Initializes parameters, generates shares, and demonstrates secret recovery.
+
+### Running the Script
+1. Save the script to a file, e.g., `shamir.sh`.
+2. Make it executable:
+   ```bash
+   chmod +x shamir.sh
+   ```
+3. Run the script:
+   ```bash
+   ./shamir.sh
+   ```
+
+## Bash script implementation using Lagrange interpolation
+
+Here’s a Bash script that implements a simplified version of Shamir's Secret Sharing using Lagrange interpolation and modular arithmetic:
+
+```bash
+#!/bin/bash
+
+# Function to calculate modular inverse using Extended Euclidean Algorithm
+mod_inverse() {
+    local a=$1
+    local p=$2
+    local m0=$p
+    local t=0
+    local q=0
+    local x0=0
+    local x1=1
+
+    if [ "$p" -eq 1 ]; then
+        echo 0
+        return
+    fi
+
+    while [ "$a" -gt 1 ]; do
+        q=$((a / p))
+        t=$p
+        p=$((a % p))
+        a=$t
+        t=$x0
+        x0=$((x1 - q * x0))
+        x1=$t
+    done
+
+    if [ "$x1" -lt 0 ]; then
+        x1=$((x1 + m0))
+    fi
+
+    echo $x1
+}
+
+# Function to evaluate the polynomial at a given x
+polynomial() {
+    local x=$1
+    local secret=$2
+    local p=$3
+    shift 3
+    local coefficients=("$@")
+    local result=$secret
+
+    for ((i = 0; i < ${#coefficients[@]}; i++)); do
+        result=$(( (result + (coefficients[i] * (x ** (i + 1))) % p) + p ) % p ))
+    done
+
+    echo $result
+}
+
+# Function to generate shares
+generate_shares() {
+    local secret=$1
+    local k=$2
+    local n=$3
+    local p=$4
+
+    local coefficients=()
+    for ((i = 0; i < k - 1; i++)); do
+        coefficients[i]=$((RANDOM % p)) # Random coefficient in [0, p)
+    done
+
+    echo "Generated Shares:"
+    for ((i = 1; i <= n; i++)); do
+        local y=$(polynomial "$i" "$secret" "$p" "${coefficients[@]}")
+        echo "Share $i: ($i, $y)"
+    done
+}
+
+# Function to calculate Lagrange basis
+lagrange_basis() {
+    local x_i=$1
+    local p=$2
+    shift 2
+    local shares=("$@")
+    local product=1
+
+    for share in "${shares[@]}"; do
+        local x_j=$(echo "$share" | cut -d',' -f1)
+        if [ "$x_j" -ne "$x_i" ]; then
+            product=$(( (product * (0 - x_j) % p * $(mod_inverse $((x_i - x_j)) $p)) % p + p) % p ))
+        fi
+    done
+
+    echo $product
+}
+
+# Function to recover secret
+recover_secret() {
+    local k=$1
+    local p=$2
+    shift 2
+    local shares=("$@")
+    local secret=0
+
+    for share in "${shares[@]}"; do
+        local x_i=$(echo "$share" | cut -d',' -f1)
+        local y_i=$(echo "$share" | cut -d',' -f2)
+        local L_i=$(lagrange_basis "$x_i" "$p" "${shares[@]}")
+
+        secret=$(( (secret + (y_i * L_i) % p) % p + p ) % p)
+    done
+
+    echo "$secret"
+}
+
+# Main script
+secret=5887        # Secret to share
+k=3                # Minimum shares needed
+n=5                # Total shares to generate
+p=6301             # Prime number greater than secret
+
+# Generate shares
+shares=()
+for ((i = 1; i <= n; i++)); do
+    share="$i,$((RANDOM % p))" # Simplified share generation for demonstration
+    shares+=("$share")
+done
+
+# Print generated shares
+generate_shares "$secret" "$k" "$n" "$p"
+
+# Example of recovering the secret using the first k shares
+recovered_secret=$(recover_secret "$k" "$p" "${shares[@]:0:k}")
+echo "Recovered Secret: $recovered_secret"
+```
+
+### Explanation of the Script
+- **mod_inverse**: Calculates the modular inverse using the Extended Euclidean Algorithm.
+- **polynomial**: Evaluates the polynomial at a given \( x \) using the coefficients and the secret.
+- **generate_shares**: Generates shares based on the secret, \( k \), and a prime \( p \). It uses random coefficients.
+- **lagrange_basis**: Computes the Lagrange basis polynomial for a given share.
+- **recover_secret**: Recovers the secret using \( k \) shares by applying Lagrange interpolation.
+- **Main**: Initializes parameters, generates shares, and demonstrates secret recovery.
+
+### Running the Script
+1. Save the script to a file, e.g., `shamir.sh`.
+2. Make it executable:
+   ```bash
+   chmod +x shamir.sh
+   ```
+3. Run the script:
+   ```bash
+   ./shamir.sh
+   ```
