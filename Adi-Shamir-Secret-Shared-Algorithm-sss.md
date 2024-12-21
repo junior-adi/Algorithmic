@@ -4,7 +4,8 @@
 
 **Adi Shamir's secret sharing** is a method that allows several people to **share a secret without any one of them knowing the complete secret.** To recover the secret, a certain number of shares are needed, which enables the people to work together without having to fully trust each other.
 
-What we mean by secret key sharing is that we want to *encrypt a message* **m** and *distribute shares* to **n** people. We then want **k** of these n people with \( k < n \) to be able to *combine their shares to recover the message m*.
+![image](https://github.com/user-attachments/assets/dea59c51-6abf-499d-9e3f-00ecb512724d)
+
 
 ### Example
 
