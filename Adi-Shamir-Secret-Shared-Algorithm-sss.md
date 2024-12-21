@@ -50,20 +50,20 @@ The simplest method is to **divide our key** into as many parts as necessary. Fo
 
 #### Definitions and Examples
 
-- **Polynomial Function**: A polynomial function is an expression of the form \( P(x) = a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0 \), where \( a_i \) are coefficients and \( n \) is a non-negative integer.
+- **Polynomial Function**: A polynomial function is an expression of the form 
+![image](https://github.com/user-attachments/assets/1f8c1d34-d435-403f-b375-5258b14fafcc)
+
+where \( a_i \) are coefficients and \( n \) is a non-negative integer.
 
 - **Examples**:
   - \( P(x) = 2x^2 + 3x + 1 \) (degree 2 polynomial)
   - \( P(x) = 5 \) (constant polynomial)
 
 - **Counterexamples**:
-  - \( P(x) = e^x \) (exponential function, not polynomial)
-  - \( P(x) = \sqrt{x} \) (square root function, not polynomial)
+ ![image](https://github.com/user-attachments/assets/d7d3db62-3792-45c7-9ad3-19b2497db865)
 
 #### Mathematical Notations
-
-- **Sum**: \( \sum_{i=1}^{n} a_i \) means the sum of \( a_i \) from \( i=1 \) to \( n \).
-- **Product**: \( \prod_{i=1}^{n} a_i \) means the product of \( a_i \) from \( i=1 \) to \( n \).
+![image](https://github.com/user-attachments/assets/c8c6074a-b6f0-4ccf-8a65-729909a0ff03)
 
 #### Pseudo-code of the Algorithm
 
@@ -80,9 +80,7 @@ function polynomial(x, coefficients):
 ### Definition
 
 Lagrange interpolation is a method for constructing a polynomial that passes through a given set of points. The polynomial is of the form:
-\[ P(x) = \sum_{i=0}^{n} y_i L_i(x) \]
-where \( L_i(x) \) is the Lagrange polynomial given by:
-\[ L_i(x) = \prod_{j=0, j \neq i}^{n} \frac{x - x_j}{x_i - x_j} \]
+![image](https://github.com/user-attachments/assets/b1042ee7-4c2b-4ec8-b361-52e9d2f527fa)
 
 ### Uniqueness and Existence Property
 
@@ -116,8 +114,8 @@ We will construct a **polynomial function** of degree \( k - 1 \), where \( k \)
 #### Form of the Function
 
 The polynomial function is written as:
-\[ P(X) = \sum_{i=0}^{k-1} a_i X^i \]
-where **\( a_0 \) is set as the secret code \( m \)**.
+![image](https://github.com/user-attachments/assets/ff6801f3-ff6b-4aca-9958-ad72245fe600)
+
 
 #### Choice of Coefficients
 
@@ -249,8 +247,8 @@ We generate the keys as follows:
 #### Recovery of the Secret
 
 When we provide certain keys (e.g., key1, key2, key4), the recovery algorithm uses:
-\[ P(X) = y_0 l_0(X) + y_1 l_1(X) + y_2 l_2(X) \mod 6301 \]
-where \( l_i(X) \) are the Lagrange polynomials.
+![image](https://github.com/user-attachments/assets/1463dbe8-d3c4-41f7-b483-f4b273a54bcc)
+
 
 Using modular arithmetic ensures that calculations remain within a finite set, making the choice of random and uniform coefficients possible. With this approach, we can recover the correct polynomial and, consequently, the initial secret.
 
