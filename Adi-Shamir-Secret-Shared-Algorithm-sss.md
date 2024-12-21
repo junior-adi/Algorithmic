@@ -23,9 +23,9 @@ Fortunately, one of the family members is an expert in cryptography. Instead of 
 
 To help with understanding, let’s imagine that we are the manager of a bank and we want to protect the **code** (let's use **5887** as an example) for our **safe**. We have **5 trusted people** to whom we want to distribute shares, and if **3 of them** combine their shares, they should be able to recover the safe code. In this example, which we will use throughout this tutorial:
 
-- \( m \) is the **safe code** (**5887**)
-- \( n \) is the **number of trusted people** (**5**)
-- \( k \) is the **minimum number of people needed** to recover the code (**3**)
+- **mm** is the **safe code** (**5887**)
+- **nn** is the **number of trusted people** (**5**)
+- **kk** is the **minimum number of people needed** to recover the code (**3**)
 
 In this key sharing process, it is important that any group of **fewer than \( k \)** people cannot gain any information about our code. Either we have **enough shares** to recover the code, or we do not, and in that case, we have **no information** about the code.
 
