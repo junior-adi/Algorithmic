@@ -6,6 +6,9 @@
 
 ![image](https://github.com/user-attachments/assets/dea59c51-6abf-499d-9e3f-00ecb512724d)
 
+### Divide and Hide (Conquer)
+
+A "Divide and Hide (Conquer)" type algorithm involves dividing the confidential information into multiple sub-informations or sub-parts. In this way, the information appears as a "secret" that cannot be cracked without the reconstruction of each of these sub-parts. From the outset, the user selects a specific number of subdivisions of their secret. It will then only be possible to reconstruct it by gathering a sufficient number of parts.
 
 ### Example
 
