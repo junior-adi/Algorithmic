@@ -50,7 +50,8 @@ The simplest method is to **divide our key** into as many parts as necessary. Fo
 
 #### Definitions and Examples
 
-- **Polynomial Function**: A polynomial function is an expression of the form 
+- **Polynomial Function**: A polynomial function is an expression of the form
+
 ![image](https://github.com/user-attachments/assets/1f8c1d34-d435-403f-b375-5258b14fafcc)
 
 - **Examples**:
@@ -63,6 +64,7 @@ The simplest method is to **divide our key** into as many parts as necessary. Fo
  ![image](https://github.com/user-attachments/assets/d7d3db62-3792-45c7-9ad3-19b2497db865)
 
 #### Mathematical Notations
+
 ![image](https://github.com/user-attachments/assets/c8c6074a-b6f0-4ccf-8a65-729909a0ff03)
 
 #### Pseudo-code of the Algorithm
@@ -80,6 +82,7 @@ function polynomial(x, coefficients):
 ### Definition
 
 Lagrange interpolation is a method for constructing a polynomial that passes through a given set of points. The polynomial is of the form:
+
 ![image](https://github.com/user-attachments/assets/b1042ee7-4c2b-4ec8-b361-52e9d2f527fa)
 
 ### Uniqueness and Existence Property
@@ -114,6 +117,7 @@ We will construct a **polynomial function** of degree \( k - 1 \), where \( k \)
 #### Form of the Function
 
 The polynomial function is written as:
+
 ![image](https://github.com/user-attachments/assets/ff6801f3-ff6b-4aca-9958-ad72245fe600)
 
 
@@ -247,6 +251,7 @@ We generate the keys as follows:
 #### Recovery of the Secret
 
 When we provide certain keys (e.g., key1, key2, key4), the recovery algorithm uses:
+
 ![image](https://github.com/user-attachments/assets/1463dbe8-d3c4-41f7-b483-f4b273a54bcc)
 
 
