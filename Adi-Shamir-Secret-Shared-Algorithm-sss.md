@@ -53,13 +53,13 @@ The simplest method is to **divide our key** into as many parts as necessary. Fo
 - **Polynomial Function**: A polynomial function is an expression of the form 
 ![image](https://github.com/user-attachments/assets/1f8c1d34-d435-403f-b375-5258b14fafcc)
 
-where \( a_i \) are coefficients and \( n \) is a non-negative integer.
-
 - **Examples**:
-  - \( P(x) = 2x^2 + 3x + 1 \) (degree 2 polynomial)
-  - \( P(x) = 5 \) (constant polynomial)
 
+![image](https://github.com/user-attachments/assets/14fd0cd2-58ba-4ce8-bf7c-24e155ec9e30)
+
+ 
 - **Counterexamples**:
+
  ![image](https://github.com/user-attachments/assets/d7d3db62-3792-45c7-9ad3-19b2497db865)
 
 #### Mathematical Notations
